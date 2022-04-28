@@ -47,7 +47,9 @@ When everything is setup nicely, you might also want to select "Run eslint --fix
 Requirements: NodeJS, PyCharm's Prettier plugin
 
 - install prettier with npm or yarn
-- Pycharm Preferences > Languages & Frameworks > JavaScript > Prettier and select prettier package
+- Pycharm Preferences > Languages & Frameworks > JavaScript > Prettier
+    - select prettier package
+    - add css file types and others if needed
 
 Also here it makes sense to "Run on save".
 
