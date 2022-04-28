@@ -1,34 +1,66 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Clean code
 
-## Getting Started
+## Linters vs Prettier
 
-First, run the development server:
+Linters have two categories of rules:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**Formatting rules:** eg: max-len, no-mixed-spaces-and-tabs, keyword-spacing, comma-style…
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Prettier alleviates the need for this whole category of rules! Prettier is going to reprint the entire program from
+scratch in a consistent way, so it’s not possible for the programmer to make a mistake there anymore.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+**Code-quality rules:** eg no-unused-vars, no-extra-bind, no-implicit-globals, prefer-promise-reject-errors…
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Prettier does nothing to help with those kind of rules. They are also the most important ones provided by linters as
+they are likely to catch real bugs with your code!
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+In other words, use Prettier for formatting and linters for catching bugs!
 
-## Learn More
+## ESLint
 
-To learn more about Next.js, take a look at the following resources:
+** PyCharm Setup **
+> Docs: https://www.jetbrains.com/help/webstorm/eslint.html
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Requirements: NodeJS
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- install eslint with npm or yarn
+- install eslint-plugin-react to lint react applications with npm or yarn
+- Pycharm Preferences > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint and select "Automatic ESLint
+  configuration"
 
-## Deploy on Vercel
+> Automatic configuration will use the ESLint package located in node_modules and the .eslintrc.* config
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+When everything is setup nicely, you might also want to select "Run eslint --fix on save"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+** Next.js **
+
+- the 2 packages are installed by default. (eslint-plugin-react is included in eslint-config-next)
+- eslintrc.json config is created by default
+
+> Config: https://eslint.org/docs/rules/
+
+## Prettier
+
+** PyCharm Setup **
+> Docs: https://www.jetbrains.com/help/webstorm/prettier.html#ws_prettier_install
+
+Requirements: NodeJS, PyCharm's Prettier plugin
+
+- install prettier with npm or yarn
+- Pycharm Preferences > Languages & Frameworks > JavaScript > Prettier and select prettier package
+
+Also here it makes sense to "Run on save".
+
+> Config: https://prettier.io/docs/en/options.html
+
+## ESLint and Prettier coexisting
+
+As ESLint and Prettier have a lot of code formatting rules in common, it is best to handle that. You can install
+https://github.com/prettier/eslint-config-prettier and extend the eslint config with it. This will turn off all rules
+that are unnecessary or might conflict with Prettier.
+
+Rules regarding formatting should then all be set in .prettierrc.*
+
+## Precommit
+
+To investigate : https://prettier.io/docs/en/precommit.html
